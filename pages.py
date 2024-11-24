@@ -73,8 +73,7 @@ class CartPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, timeout=60)
 
-        self.item_list = (
-        By.XPATH, "//*[@class='inventory_item_price']")  # Локатор XPATH элемента продукта. Локатор должен находить
+        self.item_list = (By.XPATH, "//*[@class='inventory_item_price']")  # Локатор XPATH элемента продукта. Локатор должен находить
         # ровно 2 элемента на странице: первый и второй товар,
         # то есть в DevTools вы должны видеть "1 of 2" при поиске данного локатора
 
