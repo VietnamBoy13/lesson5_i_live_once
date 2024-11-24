@@ -42,14 +42,14 @@ class InventoryPage(BasePage):
         super().__init__(driver, timeout=60)
 
         self.item = (By.ID, 'item_4_title_link')  # Заголовок любого товара: Здесь будет локатор по ID
-        self.add_jacket_to_catr_btn = (By.XPATH, "//*[@id='add-to-cart-sauce-labs-fleece-jacket']")  # Кнопка Add to Cart для Sauce Labs Fleece Jacket: Здесь будет локатор XPATH
+        self.add_jacket_to_cart_btn = (By.XPATH, "//*[@id='add-to-cart-sauce-labs-fleece-jacket']")  # Кнопка Add to Cart для Sauce Labs Fleece Jacket: Здесь будет локатор XPATH
         self.cart_btn = (By.XPATH, "//*[@id='shopping_cart_container']")  # Кнопка корзины: Здесь будет локатор XPATH
 
     def choose_item(self) -> None:
         self.find_element(*self.item).click()
 
     def add_jacket_to_cart_btn_click(self) -> None:
-        self.find_element(*self.add_jacket_to_catr_btn).click()
+        self.find_element(*self.add_jacket_to_cart_btn).click()
 
     def cart_btn_click(self) -> None:
         self.find_element(*self.cart_btn).click()
