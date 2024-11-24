@@ -59,9 +59,8 @@ class ItemPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, timeout=60)
 
-        self.add_to_cart_btn = (By.XPATH, "//*[@id='add-to-cart']")  # Кнопка Add to Cart: Здесь будет локатор XPATH
-        self.back_to_products = (
-        By.XPATH, "//*[@name='back-to-products']")  # Кнопка Back to products: Здесь будет локатор XPATH
+        self.add_to_cart_btn = (By.XPATH, "//*[@name='add-to-cart']")  # Кнопка Add to Cart: Здесь будет локатор XPATH
+        self.back_to_products = (By.XPATH, "//*[@name='back-to-products']")  # Кнопка Back to products: Здесь будет локатор XPATH
 
     def add_to_cart_btn_click(self) -> None:
         self.find_element(*self.add_to_cart_btn).click()
