@@ -44,6 +44,8 @@ class InventoryPage(BasePage):
         self.item = (By.ID, 'item_4_title_link')  # Заголовок любого товара: Здесь будет локатор по ID
         self.add_jacket_to_cat_btn = (By.XPATH, "//*[@id='add-to-cart-sauce-labs-fleece-jacket']")  # Кнопка Add to Cart для Sauce Labs Fleece Jacket: Здесь будет локатор XPATH
         self.cart_btn = (By.XPATH, "//*[@id='shopping_cart_container']")  # Кнопка корзины: Здесь будет локатор XPATH
+        self.open_to_menu_btn = (By.ID, 'react-burger-menu-btn')
+        self.back_to_logout = (By.XPATH, "//*[@id='logout_sidebar_link']")
 
     def choose_item(self) -> None:
         self.find_element(*self.item).click()
@@ -54,6 +56,11 @@ class InventoryPage(BasePage):
     def cart_btn_click(self) -> None:
         self.find_element(*self.cart_btn).click()
 
+    def open_to_menu_btn_click(self) -> None:
+        self.find_element(*self.open_to_menu_btn).click()
+
+    def back_to_logout_click(self):
+        self.find_element(*self.back_to_logout).click()
 
 class ItemPage(BasePage):
     def __init__(self, driver):
@@ -76,6 +83,10 @@ class CartPage(BasePage):
         self.item_list = (By.XPATH, "//*[@class='inventory_item_price']")  # Локатор XPATH элемента продукта. Локатор должен находить
         # ровно 2 элемента на странице: первый и второй товар,
         # то есть в DevTools вы должны видеть "1 of 2" при поиске данного локатора
+        self.back_to_products_btn = (By.XPATH, "//*[@name='continue-shopping']")
 
     def number_of_products(self) -> int:
         return len(self.find_elements(*self.item_list))
+
+    def back_to_products_btn_click (self) -> None:
+        self.find_element(*self.back_to_products_btn).click()
