@@ -102,6 +102,7 @@ class CartPage(BasePage):
     def number_of_products(self) -> int:
         return len(self.find_elements(*self.item_list))
 
+
     @allure.step(r'Нажатие кнопки выход')
     def back_to_products_btn_click (self) -> None:
         self.find_element(*self.back_to_products_btn).click()
