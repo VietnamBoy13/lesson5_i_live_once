@@ -1,6 +1,9 @@
+import allure
+
 from pages import LoginPage, InventoryPage, ItemPage, CartPage
 
-
+@allure.suite("Лабораторная")
+@allure.title("Проверка сайта")
 def test_est_1_login(driver):
     auth_page = LoginPage(driver)
     auth_page.auth('standard_user', 'secret_sauce')
@@ -25,3 +28,4 @@ def test_est_1_login(driver):
     auth_page.auth('standard_user', '12345')
 
 # проверку входа на страницу
+    assert InventoryPage(driver).assert_not_on_inventory_page()
