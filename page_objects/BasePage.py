@@ -33,7 +33,7 @@ class BasePage:
         """
 
         return self.wait.until(expected_conditions.visibility_of_all_elements_located((by, value)),
-                           message=f'Элементы {by, value} не найдены')
+                               message=f'Элементы {by, value} не найдены')
 
     def is_element_visible(self, locator: tuple) -> bool:
         """
@@ -70,6 +70,13 @@ class BasePage:
         """
         self.find_element(*locator).send_keys(info)
 
-    def wait_for_element_to_be_visible(self, locator):
-        """Ожидание, пока элемент станет видимым."""
-        return self.wait.until(EC.visibility_of_element_located(locator))
+    def wait_for_element_to_be_visible(self, locator, timeout=10):
+        """Ожидание видимости элемента на странице."""
+        return WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_element_located(locator)
+        )
+
+    def get_element_text(self, locator) -> str:
+        """Получение текста элемента, ожидая его появления."""
+        element = self.wait_for_element_to_be_visible(locator)
+        return element.get_attribute('textContent')

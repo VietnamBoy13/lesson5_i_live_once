@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
-from tests.page_objects.BasePage import BasePage
+from page_objects.BasePage import BasePage
+
 
 class LoadDelayPage(BasePage):
     def __init__(self, driver):

@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from tests.page_objects.BasePage import BasePage
+from page_objects.BasePage import BasePage
 import allure
 
 

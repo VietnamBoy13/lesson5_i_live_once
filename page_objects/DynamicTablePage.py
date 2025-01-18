@@ -1,6 +1,6 @@
 import allure
 from selenium.webdriver.common.by import By
-from tests.page_objects.BasePage import BasePage
+from page_objects.BasePage import BasePage
 
 
 class DynamicTablePage(BasePage):
@@ -22,5 +22,3 @@ class DynamicTablePage(BasePage):
     def get_highlighted_cpu_value(self) -> str:
         """Получение значения CPU из выделенной строки."""
         return self.wait_for_element_to_be_visible(self.highlighted_cpu_locator).text.split()[-1]
-
-

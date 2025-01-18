@@ -1,10 +1,12 @@
 import allure
-from tests.page_objects.MainPage import MainPage
-from tests.page_objects.ProgressBarPage import ProgressBarPage
-from tests.page_objects.LoadDelayPage import LoadDelayPage
-from tests.page_objects.TextInputPage import TextInputPage
-from tests.page_objects.DynamicTablePage import DynamicTablePage
-from tests.page_objects.NbspPage import NbspPage
+from page_objects.MainPage import MainPage
+from page_objects.ProgressBarPage import ProgressBarPage
+from page_objects.LoadDelayPage import LoadDelayPage
+from page_objects.TextInputPage import TextInputPage
+from page_objects.DynamicTablePage import DynamicTablePage
+from page_objects.NbspPage import NbspPage
+from conftest import driver
+
 
 @allure.title('Проверка работы Progress Bar')
 @allure.description('''
@@ -54,11 +56,34 @@ def test_load_delay_page(driver):
 3. Нажать кнопку;
 4. Проверить, что имя кнопки изменилось.
 ''')
+def test_text_input_page1(driver):
+    main_page = MainPage(driver)
+    main_page.click_link_text_input()
+
+    text_input_page = TextInputPage(driver)
+    new_button_name = "Новое имя кнопки"  # Пример нового имени
+
+    # Получение текста кнопки до изменения
+    old_button_name = text_input_page.get_button_text()
+
+    # Ввод нового имени кнопки
+    text_input_page.enter_new_button_name(new_button_name)
+
+    # Нажатие на кнопку
+    text_input_page.click_update_button()
+
+    # Получение текста кнопки после изменения
+    updated_button_name = text_input_page.get_button_text()
+
+    # Проверка, что имя кнопки изменилось
+    assert updated_button_name == new_button_name, f"Имя кнопки не изменилось. Ожидалось: '{new_button_name}', получено: '{updated_button_name}'."
+
+
 def test_text_input_page(driver):
     main_page = MainPage(driver)
     main_page.click_link_text_input()
     text_input_page = TextInputPage(driver)
-    new_button_name = "Новое имя кнопки"  # Пример нового имени
+    new_button_name = "Новое имя кнопки"
     with allure.step('Получение текста кнопки до изменения'):
         old_button_name = text_input_page.get_button_text()
         allure.attach(old_button_name, name="Старое имя кнопки", attachment_type=allure.attachment_type.TEXT)
@@ -93,7 +118,9 @@ def test_dynamic_table_page(driver):
         highlighted_cpu_value = dynamic_table_page.get_highlighted_cpu_value()
         allure.attach(highlighted_cpu_value, name="Выделенный CPU", attachment_type=allure.attachment_type.TEXT)
 
-    assert chrome_cpu_value == highlighted_cpu_value, f"Значения не совпадают. CPU Chrome: '{chrome_cpu_value}', Выделенный CPU: '{highlighted_cpu_value}'."
+    with allure.step("Проверить, что CPU Chrome: '{chrome_cpu_value}' совпадает с выделенным CPU: '{highlighted_cpu_value}'"):
+        assert chrome_cpu_value == highlighted_cpu_value, f"Значения не совпадают. CPU Chrome: '{chrome_cpu_value}', Выделенный CPU: '{highlighted_cpu_value}'."
+
 
 @allure.title('Проверка работы Nbsp')
 @allure.description('''
