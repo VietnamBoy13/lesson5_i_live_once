@@ -65,7 +65,7 @@ def test_text_input_page1(driver):
 
     # Получение текста кнопки до изменения
     old_button_name = text_input_page.get_button_text()
-
+    allure.attach(old_button_name, name="Старое имя кнопки", attachment_type=allure.attachment_type.TEXT)
     # Ввод нового имени кнопки
     text_input_page.enter_new_button_name(new_button_name)
 
@@ -76,24 +76,7 @@ def test_text_input_page1(driver):
     updated_button_name = text_input_page.get_button_text()
 
     # Проверка, что имя кнопки изменилось
-    assert updated_button_name == new_button_name, f"Имя кнопки не изменилось. Ожидалось: '{new_button_name}', получено: '{updated_button_name}'."
-
-
-def test_text_input_page(driver):
-    main_page = MainPage(driver)
-    main_page.click_link_text_input()
-    text_input_page = TextInputPage(driver)
-    new_button_name = "Новое имя кнопки"
-    with allure.step('Получение текста кнопки до изменения'):
-        old_button_name = text_input_page.get_button_text()
-        allure.attach(old_button_name, name="Старое имя кнопки", attachment_type=allure.attachment_type.TEXT)
-    with allure.step('Ввод нового имени кнопки'):
-        text_input_page.enter_new_button_name(new_button_name)
-    with allure.step('Нажатие на кнопку'):
-        text_input_page.click_update_button()
-    with allure.step('Получение текста кнопки после изменения'):
-        updated_button_name = text_input_page.get_button_text()
-        allure.attach(updated_button_name, name="Новое имя кнопки", attachment_type=allure.attachment_type.TEXT)
+    allure.attach(updated_button_name, name="Новое имя кнопки", attachment_type=allure.attachment_type.TEXT)
     assert updated_button_name == new_button_name, f"Имя кнопки не изменилось. Ожидалось: '{new_button_name}', получено: '{updated_button_name}'."
 
 
